@@ -1,5 +1,5 @@
 # demeter
-Regex-based file harvester for local and remote file systems. `demeter` will search the targeted folder or share for files matching the regular expressions provided respecting configurable constraints such as file size and path depth. If `-o, --output [folder]` is provided, `demeter` will save the matched files on a folder named `[folder]` recreating their parent folder structure on the file system.
+Regex-based remote file harvester. `demeter` will search the targeted folder or share for files matching the regular expressions provided respecting configurable constraints such as file size and path depth. If `-o, --output [folder]` is provided, `demeter` will save the matched files on a folder named `[folder]` recreating their parent folder structure on the file system.
 
 
 ## Modules
