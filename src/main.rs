@@ -8,6 +8,7 @@ use demeter::args::*;
 
 mod local;
 mod smb;
+mod s3;
 
 
 fn main() {
@@ -21,6 +22,10 @@ fn main() {
 
         DemeterCommand::Smb(args) => {
             ret = smb::main(args);
+        },
+
+        DemeterCommand::S3(args) => {
+            ret = s3::main(args);
         }
     }
 
