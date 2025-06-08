@@ -103,17 +103,26 @@ pub fn harvest(client: &SmbClient, folder: &str, regexes: &Vec<Regex>, root: Opt
 					entity_path_str, 
 					Some(&format!("failed to create {}: {}", copy_path, e)
 				));
+
 				continue;
 			}
 		}
 
 		copy_path.push_str(entity_file_str);
 
-		let mut reader = client.open_with(
-			entity_path_str,
-			SmbOpenOptions::default().read(true),
-		).unwrap();
+		let mut reader;
 
+		match client.open_with(entity_path_str, SmbOpenOptions::default().read(true)) {
+			Ok(r) => { reader = r },
+			Err(e) => {
+				print_file_failed(
+					entity_path_str,
+					Some(&format!("failed to open {}: {}", entity_path_str, e)
+				));
+
+				continue;
+			}
+		}
 
 		match File::create(&copy_path) {
 			Ok(f) => {
@@ -128,6 +137,8 @@ pub fn harvest(client: &SmbClient, folder: &str, regexes: &Vec<Regex>, root: Opt
 							entity_file_str,
 							Some(&format!("download failed remotely: {}", e))
 						);
+
+						continue;
 					}
 				}
 			}
